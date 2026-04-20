@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SFUA — Search For Useful Articles</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,10 +19,12 @@
             background: #f0f7ff;
             color: #2c3e50;
             line-height: 1.5;
+            scroll-behavior: smooth;
         }
 
         .container {
             width: 1000px;
+            max-width: 92%;
             margin: 0 auto;
         }
 
@@ -39,6 +43,7 @@
             justify-content: space-between;
             align-items: center;
             width: 1000px;
+            max-width: 92%;
             margin: 0 auto;
         }
 
@@ -121,10 +126,9 @@
             font-size: 18px;
             color: #2c3e50;
             width: 700px;
+            max-width: 100%;
             margin-bottom: 28px;
         }
-
-        /* Button Start */
         .btn-start {
             display: inline-flex;
             align-items: center;
@@ -136,14 +140,49 @@
             font-weight: 600;
             border-radius: 40px;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+            transform-origin: center center;
         }
 
+        @keyframes wobbleLeft {
+            0% {
+                transform: translateX(0%) rotate(0deg);
+            }
+            15% {
+                transform: translateX(-4%) rotate(-1.5deg);
+            }
+            30% {
+                transform: translateX(2%) rotate(1deg);
+            }
+            45% {
+                transform: translateX(-2.5%) rotate(-0.8deg);
+            }
+            60% {
+                transform: translateX(1.2%) rotate(0.5deg);
+            }
+            75% {
+                transform: translateX(-0.8%) rotate(-0.3deg);
+            }
+            100% {
+                transform: translateX(0%) rotate(0deg);
+            }
+        }
         .btn-start:hover {
             background: #5f9bb3;
             transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            
+            animation: wobbleLeft 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-start:hover {
+                animation: none;
+                transform: translateY(-1px);
+            }
         }
 
         /* Instruction list */
@@ -178,7 +217,6 @@
             color: #2c5a6e;
         }
 
-        /* Repository block */
         .repo-links {
             display: flex;
             gap: 20px;
@@ -256,7 +294,27 @@
 
         .footer .container {
             width: 1000px;
+            max-width: 92%;
             margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero__title {
+                font-size: 44px;
+            }
+            .section__title {
+                font-size: 28px;
+            }
+            .header__nav ul {
+                gap: 16px;
+            }
+            .btn-start {
+                padding: 10px 22px;
+                font-size: 14px;
+            }
+            .hero {
+                padding: 50px 0 30px;
+            }
         }
     </style>
 </head>
@@ -269,7 +327,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#install">How Install</a></li>
                     <li><a href="#repository">Repository</a></li>
-                    <li><a href="https://t.me/ecl901">My Telegram</a></li>
+                    <li><a href="https://t.me/ecl901" target="_blank" rel="noopener noreferrer">My Telegram</a></li>
                 </ul>
             </nav>
         </div>
@@ -294,6 +352,7 @@
                     Search For Useful Articles is a program that helps you find useful articles using DeepSeek AI. Fast, free, and open source.
                     You will receive a free balance of 10 million tokens per month — enough for hundreds of searches
                 </div>
+                
                 <a href="search.html" class="btn-start">▶ Start</a>
             </div>
         </section>
@@ -302,12 +361,27 @@
             <div class="container">
                 <h2 class="section__title">How Use It</h2>
                 <ul class="instruction-list">
-                    <li>Get API Key on <a href="https://platform.deepseek.com">DeepSeek Platform</a></li>
+                    <li>Get API Key on <a href="https://platform.deepseek.com" target="_blank" rel="noopener noreferrer">DeepSeek Platform</a></li>
                     <li>In the dashboard, navigate to "API Keys" section</li>
                     <li>Click the button "Create new API key"</li>
                     <li>Copy your key</li>
                     <li>Paste your API key in the input field</li>
                 </ul>
+            </div>
+        </section>
+        <section id="repository" class="section">
+            <div class="container">
+                <h2 class="section__title">Repository & Open Source</h2>
+                <div class="section__text" style="width:100%; max-width:700px;">
+                    Explore the source code, contribute, or self-host SFUA. The project is fully open and transparent.
+                </div>
+                <div class="repo-links">
+                    <a href="#" class="btn-repo" aria-label="GitHub repository (placeholder)">📂 GitHub Repo</a>
+                    <a href="#" class="btn-download" aria-label="Download latest release">⬇️ Download ZIP</a>
+                </div>
+                <div style="margin-top: 16px;">
+                    <a href="#" class="license-link">MIT License</a>
+                </div>
             </div>
         </section>
     </main>
@@ -317,5 +391,10 @@
             © 2026 Search For Useful Articles. Open source project.
         </div>
     </footer>
+    <script>
+        (function() {
+            console.log("SFUA — Button hover wobble (left rocking) ready!");
+        })();
+    </script>
 </body>
 </html>
